@@ -71,27 +71,27 @@ print(arr)
 
 def tri_par_insertion(X):
     for i in range(1, len(X)):
-        "On commence une boucle qui parcourt le tableau à partir du deuxième élément (indice 1) 
-        "jusqu'au dernier élément (indice len(X) - 1).
+        "On commence une boucle qui parcourt le tableau à partir du deuxième élément (indice 1)"
+        "jusqu'au dernier élément (indice len(X) - 1)."
         "La variable i représente l'indice de l'élément actuel à insérer dans la portion triée."
         cle = X[i]
         "Cet élément est celui que l'on va insérer à la bonne position dans la portion triée."
         j= i - 1
-        "On initialise la variable j à i - 1. Cela représente l'indice de l'élément précédent 
+        "On initialise la variable j à i - 1. Cela représente l'indice de l'élément précédent "
         "dans le tableau, à partir duquel on commence à comparer la clé."
         while j >=0 and cle < X[j]:
-            "On commence une boucle while qui continue tant que :
-            "j >= 0 : On n'a pas dépassé le début du tableau.
-            "cle < X[j] : La clé est plus petite que l'élément à l'indice j.
-            "Cette boucle permet de déplacer les éléments plus grands que la 
+            "On commence une boucle while qui continue tant que : "
+            "j >= 0 : On n'a pas dépassé le début du tableau. "
+            "cle < X[j] : La clé est plus petite que l'élément à l'indice j."
+            "Cette boucle permet de déplacer les éléments plus grands que la "
             "clé vers la droite pour faire de la place pour la clé."
             X[j+1]=X[j]
-            "On décale l'élément à l'indice j vers la droite (à l'indice j + 1).
+            "On décale l'élément à l'indice j vers la droite (à l'indice j + 1)."
             "Cela permet de libérer de l'espace pour insérer la clé."
             j-=1
             "On décrémente j pour comparer la clé avec l'élément précédent dans le tableau."
             X[j+1]=cle 
-            "Une fois la bonne position trouvée (c'est-à-dire lorsque la clé n'est plus plus 
+            "Une fois la bonne position trouvée (c'est-à-dire lorsque la clé n'est plus " 
             "petite que X[j]), on insère la clé à l'indice j + 1."
 
 # Cette algorithme parcourt le tableau de gauche à droite, en considérant chaque élement comme une
@@ -116,3 +116,95 @@ print("Tableau trié :", arr)
 
 
 # Sortie : Tableau trié : [11, 12, 22, 25, 64]
+
+## TRI RAPIDE (Quicksort):
+
+#il utilise une approche de division, et concatene pour trier un tableau
+# Il choisit un element pivot, divise le tableau en deux sous-tableaux,
+# puis recursivement trie les sous-tableaux 
+
+def tri_rapide(X):
+    "On vérifie si la longueur du tableau X est inférieure ou égale à 1."
+    "Si c'est le cas, le tableau est déjà trié (cas de base de la récursion)"
+    "et on le retourne tel quel."
+    if len(X)<=1:
+        return X
+    
+    "On choisit un pivot en prenant l'élément au milieu du tableau X."
+    pivot = X[len(X)//2]
+
+    "On crée des listes contenant tous les éléments de X qui sont strictement"
+    "inférieurs, eagux et superieur au pivot."
+    elements_inf = [x for x in X if x < pivot]
+    elements_eq = [x for x in X if x==pivot]
+    elements_sup = [x for x in X if x > pivot]
+    # concaténation des 3 parties
+    return tri_rapide(elements_inf) + elements_eq + tri_rapide(elements_sup)
+
+    arr = [64, 25, 12, 22, 11]
+    arr_trie = tri_rapide(arr)
+    print("Tableau trié:", arr_trie)
+
+    # sortie = Tableau trié: [11, 12, 22, 25, 64]
+
+    # resumé de cette algorithme : il commence par choisir un element pivot du tableau. Ensuite, 
+    # il divise le tableau en trois parties: les elements <,= et > au pivot. les deux sous tableaux
+    # contenant les elements inferieurs et superieurs sont ensuite triés récursivement en utilisant
+    # le meme algo 
+
+    # complexité en temps moyenne : 0(n log n)
+
+## 5. TRI FUSION (MERGESORT)
+
+# Description:le tri fusion (Mergesort) est un algo de tri efficace qui divise recursivement un tableuau
+# en deux moitiés triées pour obtenir le tableau final trié
+
+def tri_fusion(X):
+    # Cas de base : si le tableau a 0 ou 1 élément, il est déjà trié
+    if len(X) <= 1:
+        return X
+
+    # Division du tableau en deux moitiés
+    milieu = len(X) // 2
+    gauche = X[:milieu]  # Extrait les éléments de l'indice 0 à milieu - 1
+    droite = X[milieu:]  # Extrait les éléments de l'indice milieu à la fin
+
+    # Appel récursif sur les deux moitiés
+    gauche = tri_fusion(gauche)
+    droite = tri_fusion(droite)
+
+    # Fusionner les deux moitiés triées
+    return fusionner(gauche, droite)
+
+
+def fusionner(gauche, droite):
+    resultat = [] # initialisation d'une liste vide
+    i = j = 0 # On initialise deux indices i et j à 0 pour parcourir les tableaux gauche et droite.
+
+    # Fusionner les deux tableaux triés
+    "On commence une boucle while qui continue tant que les deux indices i et j sont dans les" 
+    "limites de leurs tableaux respectifs."
+    while i < len(gauche) and j < len(droite):
+        "On compare les éléments actuels de gauche et droite."
+        " Si l'élément de gauche est plus petit, on l'ajoute à resultat."
+        if gauche[i] < droite[j]:
+            "On ajoute l'élément gauche[i] à resultat."
+            resultat.append(gauche[i])
+            "On incrémente l'indice i pour passer à l'élément suivant de gauche."
+            i += 1
+        else:
+            resultat.append(droite[j])
+            j += 1
+
+    # Ajouter les éléments restants de gauche (s'il y en a)
+    resultat.extend(gauche[i:]) # On ajoute les éléments restants de gauche à resultat.
+
+    # Ajouter les éléments restants de droite (s'il y en a)
+    resultat.extend(droite[j:]) # On ajoute les éléments restants de droite à resultat.
+
+    return resultat
+
+    # Exemple:
+    arr =[64,25,12,22,11]
+    arr_trie = tri_fusion(arr)
+    print("Tableau trié:", arr_trie)
