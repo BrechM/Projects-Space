@@ -153,6 +153,7 @@ def tri_rapide(X):
     # le meme algo 
 
     # complexité en temps moyenne : 0(n log n)
+    # Cet algorithme est un choix judicieux pour trier de grande quantite de données.
 
 ## 5. TRI FUSION (MERGESORT)
 
@@ -172,7 +173,9 @@ def tri_fusion(X):
     # Appel récursif sur les deux moitiés
     gauche = tri_fusion(gauche)
     droite = tri_fusion(droite)
-
+    "c'est ici que s'arrete l'algorithme de trie à fusion "
+    " On applique le tri _a_ fusion jusqu'a ce que cette condition soit respecté len(X)<=1"
+    "Dans cette seconde partie, on implemente la fusion"
     # Fusionner les deux moitiés triées
     return fusionner(gauche, droite)
 
@@ -208,3 +211,162 @@ def fusionner(gauche, droite):
     arr =[64,25,12,22,11]
     arr_trie = tri_fusion(arr)
     print("Tableau trié:", arr_trie)
+
+# l'algorithme de tri à fusion est une option efficace pour trier de grandes quantités de données"
+
+## 6. RECHERCHE BINAIRE
+
+# Detail : algorithme de recherche efficace utilisé pour trouver un element dans un "tableau trié"
+# il divise recursivement le tableau en deux moitiés, compare l'element recherché avec l'element au milieu et réduit la recherche
+# à la moitié appropriée du tableau.
+
+# Ecrire une fonction qui effectue une recherche binaire dans un tableau trié et renvoie l'indice de 
+# l'element recherché s'il est présent, sinon -1
+
+def recherche_binaire(X, element):
+    debut = 0
+    fin = len(X) - 1
+
+    while debut <=fin:
+        milieu=(debut+fin)//2
+    
+        if X[milieu]==element:
+            return milieu
+        elif X[milieu]<element:
+            debut=milieu + 1
+        else:
+            fin=milieu - 1
+
+    return -1
+
+# l'algorithme de recherche binaire  commence par initialiser les indices debut et fin pour deliminer
+# la portion du tableau dans laquelle il recherche. Il calcule ensuite l'indice milieu qui est l'indice
+# de l'element au milieu de la portion actuelle. l'algorithme compare l'element recherché avec l'element
+# au milieu, et en fonction de cette comparaison, il reduit la recherche à la moitié appropriée du tableau
+
+# Exemple
+arr = [11,12,22,25,64]
+element_recherche = 22
+indice = recherche_binaire(arr, element_recherche)
+
+if indice !=-1:
+    print(f"L'élement {element_recherche} se trouve à l'indice {indice}.")
+else:
+    print(f"L'élement {element_recherche} n'a pas été trouvé dans le tableau")
+
+
+## 7. Recherche séquentielle
+
+# Cette algo recherche un élement dans un tableau en parcourant le tableau de gauche à droite et en
+# comparant chaque element avec l'élement recherché
+
+# Ecrire une fonction qui effectue une recherche séquentielle dans un tableau et renvoie l'indice de 
+# l'élement recherché s'il est présent, sinon -1
+
+def recherche_sequentielle(X, element):
+    for i in range(len(X)):
+        if X[i]==element:
+            return i
+    return -1
+
+# Exemple
+arr =[11, 12, 22, 25, 64]
+element_recherche = 22
+
+indice=recherche_sequentielle(arr, element_recherche)
+
+if indice !=-1:
+    print(f"L'element {element_recherche} se trouve à l'indice {indice}.")
+else:
+    print(f"L'element {element_recherche} n'a pas été été trouvé dans le tableau.")
+
+# Détail de l'algorithme: l'algorithme sequentielle parcourt le tableau  élement par élement en 
+# utilisant une boucle for. A chaque itération, il compare l'element en cour de traitement avec l'element
+# recherché. Si l'element est trouvé, l'indice de cet élement est renvoyé. Si la boucle se termine sans
+# trouver l'élement, -1 est renvoyé pour indiquer que l'element n'a pas été trouvé.
+
+## 8. Factorielle d'un nombre
+
+# Probleme : Calcul de la factorielle d'un nombre
+
+# Detail: La factorielle d'un nombre entier positif n, notée n!, est le produit de tous les entiers 
+# positifs de 1 à n.
+
+def factorielle(n):
+    if n==0:
+        return 1
+    else:
+        resultat=1
+        for i in range(1, n+1):
+            resultat*=i
+            "À chaque itération, on multiplie resultat par i."
+            "Cela calcule progressivement la factorielle de n."
+        return resultat
+
+# Exemple :
+n=5
+fact = factorielle(n)
+print(f"La factorielle de {n} est {fact}.")
+
+## 9. Calcul de la somme d'une série d'entiers
+
+# Probleme : Calcul de la somme d'une série d'entiers
+# Detail de l'algo : Ecrire une fonction qui calcule la somme des entiers de 1 à n, ou n est un nombre
+# entier positif donné. En d'autres termes, vous devez calculer la somme 1 + 2 + 3 +...+n.
+
+def  somme_serie_entiers(n):
+    somme = 0
+    for i in range(1,n + 1):
+        somme +=i
+    return somme 
+
+# Exemple:
+n = 5
+resultat = somme_serie_entiers(n)
+print(f"La somme des entiers de 1 à {n} est {resultat}")
+
+## 10. Calcul de la puissance d'un nombre :
+
+# Probleme  : Calcul de la puissance d'un nombre
+
+# Detail:  ecrire une fonction qui calcule la puissance d'un nombre x
+# élevé à une puissance entiere positive n, ou x et n sont des nombres données.
+# En d'autres termes, vous devez calculer x^n
+
+def puissance(x,n):
+    resultat = 1 # Pourquoi 1 ? Parce que x exposant 0 est égale 1, i,initialisation
+    for _ in range(n):
+        "Le symbole _ est utilisé pour indiquer que la variable d'itération (i) n'est pas"
+        " utilisée dans le corps de la boucle. On pourrait aussi utiliser i, mais _ est" 
+        "une convention pour ignorer la variable."
+        resultat*=x
+        "À chaque itération, on multiplie resultat par x."
+    return resultat 
+
+# Version recursive
+def puissance(x, n):
+    if n == 0:
+    "On vérifie si l'exposant n est égal à 0."
+    "Si n == 0, on retourne 1. Cela met fin à la récursion.""
+        return 1
+    else:
+        "Si n n'est pas égal à 0, on exécute le bloc de code suivant."
+        return x * puissance(x, n - 1)
+
+# version optimisée (exponentiation rapide):
+def puissance(x, n):
+    resultat = 1
+    while n > 0:
+        if n % 2 == 1:  # Si n est impair
+            resultat *= x
+        x *= x  # x = x^2
+        n //= 2  # n = n // 2
+    return resultat
+
+# Exercice :
+x = 2
+n = 5
+resultat = puissance(x,n)
+print(f"{x} élevé à la puissance {n} est égal à {resultat}")
+
+## 11. Calcul du PGCD de deux nombres
