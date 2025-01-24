@@ -357,10 +357,11 @@ def puissance(x, n):
 def puissance(x, n):
     resultat = 1
     while n > 0:
-        if n % 2 == 1:  # Si n est impair
-            resultat *= x
-        x *= x  # x = x^2
-        n //= 2  # n = n // 2
+        if n % 2 == 1:  # Si n est impair, On vérifie si n est impair en utilisant l'opérateur modulo (%).
+            # Si n est impair, cela signifie qu'il y a un facteur supplémentaire de x à prendre en compte dans le résultat.
+            resultat *= x # Si n est impair, on multiplie resultat par x.
+        x *= x  # x = x^2 , On élève x au carré (x = x^2).
+        n //= 2  # traduction : n = n // 2, On divise n par 2 en utilisant la division entière (//).
     return resultat
 
 # Exercice :
