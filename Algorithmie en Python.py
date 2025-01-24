@@ -346,11 +346,11 @@ def puissance(x,n):
 # Version recursive
 def puissance(x, n):
     if n == 0:
-    "On vérifie si l'exposant n est égal à 0."
-    "Si n == 0, on retourne 1. Cela met fin à la récursion.""
+    # On vérifie si l'exposant n est égal à 0.
+    # Si n == 0, on retourne 1. Cela met fin à la récursion.
         return 1
     else:
-        "Si n n'est pas égal à 0, on exécute le bloc de code suivant."
+        # Si n n'est pas égal à 0, on exécute le bloc de code suivant.
         return x * puissance(x, n - 1)
 
 # version optimisée (exponentiation rapide):
