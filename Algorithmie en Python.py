@@ -371,3 +371,25 @@ resultat = puissance(x,n)
 print(f"{x} élevé à la puissance {n} est égal à {resultat}")
 
 ## 11. Calcul du PGCD de deux nombres
+
+# Description du pb : Ecrire une fonction qui calcule le PGCD de deux nombres entiers positifs, a et b,
+# ou a et b sont donnés. Le PGCD de deux nombres est le plus grand nombre entier qui divise à la fois a et b
+# sans laisser de reste
+
+# Algorithme d'euclide: PGCD(a,b)=PGCD(b,a modulo b)
+
+def PGCD(a, b):
+    while b: # Tant que b n'est pas égal à 0
+        a, b = b, a % b # On met à jour a et b ,a devient b et b devient egale au reste (a % b) 
+        # NB : Le modulo c'est le reste dela divison euclidienne
+    return a # # Quand b devient 0, a est le PGCD
+
+# et le PGCD c'est le reste de la division, ici 6 
+
+# Exemple d'utilisation :
+nbr1 = 48
+nbr2 = 18
+resultat = PGCD(nbr1,nbr2)
+print(f"le PGCD de {nbr1} et {nbr2} est de {resultat}")
+
+## 12. Calcul du plus petit commun multiple (PPCM)
