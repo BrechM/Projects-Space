@@ -412,7 +412,7 @@ print(f"Le PPCM de {nbre1} et {nbre2} est de {resultat}")
 
 # Probleme: Recherche de nombres premiers dans une plage donnée
 # detail: fonction qui recherche et renvoie tous les nombres premiers
-# # dans une plage donnée de 1 à n, ou n est le nombre donné, un nombre
+# dans une plage donnée de 1 à n, ou n est le nombre donné, un nombre
 # premier est un nombre entier positif superieur à 1 qui n'a aucun diviseur autre que 1 et lui meme
 
     
@@ -421,6 +421,8 @@ def est_nombre_premier(nombre):
         return False
     for i in range(2, int(nombre**0.5) + 1): # la boucle vérifie les diviseurs potentiels de 2 à int(nombre**0.5)
         # La boucle for parcourt tous les entiers de 2 à la racine carrée de nombre (arrondie à l'entier supérieur).
+        # Si un nombre n n'est pas premier, il a au moins un diviseur inférieur ou égal à sa racine carrée. 
+        # Cela permet de réduire le nombre de divisions à effectuer.
         if nombre % i == 0: # Vérifie si nombre est divisible par i (c-a-d si le reste de la division de nombre par i est 0).
             return False # cela signifie que nombre a un diviseur autre que 1 et lui-même, donc il n'est pas premier.
     return True # Si aucun diviseur n'est trouvé après la fin de la boucle, la fonction retourne True, indiquant que le nombre est premier.
@@ -431,3 +433,38 @@ def recherche_nombres_premiers(n):
         if est_nombre_premier(nombre):
             nombres_premiers.append(nombre)
     return nombres_premiers
+
+# Exemple :
+n = 30
+nbr_premiers = recherche_nombres_premiers(n) 
+print(f"Les nombres premiers dans la plage de 1 à {n} sont: {nbr_premiers}")
+
+# Fonctionnement : dans la premiere partie, on commence par verifier si le nbre 
+# donné est premier. Il parcourt tous les entiers de 2 à la racine carrée
+# du nombre et verifie si le  nombre est divisible par l'un d'entre eux. si tel est le cas,
+# le nombre n'est pas premier.
+
+## 14. Calcul de la somme des chiffres d'un nombre
+
+# Probleme: ecrire une fonction qui calcule la somme des chiffres d'un nombre entier donné.
+# Par exemple, pour le nbre 123, la somme des chiffres est 1 + 2 + 3 = 6
+
+def somme_chiffres(nombre):
+    somme = 0
+    while nombre > 0: # Démarre une boucle while qui continue tant que nombre est supérieur à 0.
+        # La 1ere iteration se fait sur 123, ensuite sur 12 et la derniere sur 1. A la 3eme iteration, nombre = 0 donc la boucle s'arrete
+        chiffre =nombre % 10 # On Extrait le dernier chiffre de nombre en utilisant modulo (%) 10.
+        somme+=chiffre # Ajoute le chiffre extrait à la variable somme.
+        # si somme = 0 et chiffre = 3, alors somme devient 3.
+        nombre //= 10
+        # Supprime le dernier chiffre de nombre en utilisant la division entière (//).
+        # si nombre = 123, alors 123 // 10 donne 12.
+    return somme # Retourne la valeur de somme après que la boucle while a terminé son exécution.
+
+
+# Exemple:
+nbr = 1234
+resultat = somme_chiffres(nbr)
+print(f"La somme des chiffres de {nbr} est de {resultat}")
+
+## 15. Calcul du nombre de chiffres dans un nombre entier
