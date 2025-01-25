@@ -393,3 +393,41 @@ resultat = PGCD(nbr1,nbr2)
 print(f"le PGCD de {nbr1} et {nbr2} est de {resultat}")
 
 ## 12. Calcul du plus petit commun multiple (PPCM)
+
+def PPCM (a,b):
+    # le PPcm est le produit de deux nombres divisé par leur PGCD
+    def PGCD(x, y):
+        while y :
+            x,y = y, x%y
+        return x
+    return (a*b)//PGCD(a,b)
+
+# Exemple :
+nbre1 = 12
+nbre2 = 18
+resultat = PPCM(nbre1, nbre2)
+print(f"Le PPCM de {nbre1} et {nbre2} est de {resultat}")
+        
+### 13. Recherche nombres premiers dans une plage donnée
+
+# Probleme: Recherche de nombres premiers dans une plage donnée
+# detail: fonction qui recherche et renvoie tous les nombres premiers
+# # dans une plage donnée de 1 à n, ou n est le nombre donné, un nombre
+# premier est un nombre entier positif superieur à 1 qui n'a aucun diviseur autre que 1 et lui meme
+
+    
+def est_nombre_premier(nombre): 
+    if nombre <= 1:
+        return False
+    for i in range(2, int(nombre**0.5) + 1): # la boucle vérifie les diviseurs potentiels de 2 à int(nombre**0.5)
+        # La boucle for parcourt tous les entiers de 2 à la racine carrée de nombre (arrondie à l'entier supérieur).
+        if nombre % i == 0: # Vérifie si nombre est divisible par i (c-a-d si le reste de la division de nombre par i est 0).
+            return False # cela signifie que nombre a un diviseur autre que 1 et lui-même, donc il n'est pas premier.
+    return True # Si aucun diviseur n'est trouvé après la fin de la boucle, la fonction retourne True, indiquant que le nombre est premier.
+
+def recherche_nombres_premiers(n):
+    nombres_premiers = []
+    for nombre in range(2, n + 1):
+        if est_nombre_premier(nombre):
+            nombres_premiers.append(nombre)
+    return nombres_premiers
