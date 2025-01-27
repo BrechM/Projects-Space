@@ -494,3 +494,52 @@ def nombre_d_chiffres(n):
 # ou
 print(nombre_d_chiffres(12345))  # Output: 5
 print(nombre_d_chiffres(0))      # Output: 1
+
+# Ce probleme es couramment utilisé en informatique pour effectuer
+# desoperations basées sur la longueur ou la structure d'un nombre, 
+# par exemple pour formater des nombre ou extraire des parties specifques
+# d'un nombre
+
+### 16. Recherche du minimum ou du maximumdan un tableau
+
+# Detail: Ecrire deux fonctions distinctes : une pour trouver le minimum
+# et une pour trouver le maximum dans un tableau donné d'entiers
+
+
+
+def trouver_minimum(tableau):
+    # Cette partie vérifie si le tableau passé en argument est vide.
+    if not tableau: # Si le tableau est vide, cette condition est vraie.
+        raise ValueError("Le tableau est vide") # Si le tableau est vide, la fonction lève une exception ValueError avec le message "Le tableau est vide". Cela permet de gérer le cas où il n'y a rien à comparer.
+    
+    minimum = tableau[0] # On initialise la variable minimum avec la première valeur du tableau.
+    for element in tableau: # La boucle parcourt chaque élément du tableau un par un.
+        if element < minimum: # cela signifie qu'on a trouvé un élément plus petit que le minimum actuel.
+            minimum = element # On met alors à jour minimum avec cette nouvelle valeur (minimum = element).
+    return minimum
+
+def trouver_maximum(tableau):
+    if not tableau:
+        raise ValueError("Le tableau est vide")
+    
+    maximum = tableau[0]
+    for element in tableau:
+        if element > maximum:
+            maximum = element
+    return maximum
+
+# Exemple
+arr = [64, 25, 12, 22, 11]
+mini = trouver_minimum(arr)
+maxi = trouver_maximum(arr)
+print(f"Le minimum dans le tableau est de {mini}.")
+print(f"Le maximu das le tableau est de {maxi}")
+
+# Utiliser pour trouver des valeurs extremes (maximum et minimum)
+# dans un ensemble de données
+
+### 17. Inversion d'une chaine de caracteres
+
+# Detail: ecrire une fonction qui ren une chaine  de caractere en entrée
+# et renvoie une nouvelle chaine de caractere de caracteres qui est l'inversion
+# de la chaine d'origine
