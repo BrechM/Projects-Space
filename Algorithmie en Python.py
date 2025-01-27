@@ -581,3 +581,48 @@ print(est_palindrome("Elu par cette crapule"))  # True
 # Résultat : True.
 
 print(est_palindrome("bonjour"))  # False
+
+# Solution : l'algorithme pour verifier si une chaine de caracteres est un palindrome commence 
+# par nettoyer la chaine en ignorant les espaces, la casse et la ponctuation. Ensuite, il compare
+# la chaine nettoyée avec son ineverse
+
+### 19. Comptage des voyelles dans une chaine de caracteres:
+
+# Detail : Ecrire une fonction qui compte le nombre de voyelles de voyelles (a,e,i,o,u)
+# dans une chaine de caracteres donnée, en ignorant la casse (majuscules ou minuscules).
+# Par exemple pour la chaine "Hello World", il y'a 3 voyelles (e,o,o).
+
+def nbre_d_voyelles(chaine):
+    voyelles = "AEIOUaeiou"
+    compteur = 0
+    for caractere in chaine: # caractere = chaque lettre
+        if caractere in voyelles:
+            compteur+=1
+    return compteur 
+
+
+def nbre_d_voyelles(chaine):
+    # Convertir la chaîne en minuscules pour simplifier la vérification
+    chaine = chaine.lower()
+    # Définir les voyelles
+    voyelles = "aeiouy"
+    # Compter le nombre de voyelles dans la chaîne
+    compte = sum(1 for e in chaine if e in voyelles) # e etant chaque caractere(ou lettres) de chaine
+    return compte
+
+# Exemple:
+chaine = "Hello World"
+resultat = nbre_d_voyelles(chaine)
+print(f"La chaine '{chaine}' contient {resultat} voyelles.")
+
+# L'algorithme pour compter les voyelles dans une chaine de caracteres commence
+# par definir une liste de caracteres de voyelles (majuscules et minuscules). Ensuite,
+# il utilise une boucle for pour parcour chaque caractere de la chaine donnée et verifie
+# si ce caractere est présent dans la liste des voyelles. Si c'est le cas, le compteur est 
+# incrémenté.
+
+# Ce probleme est couramment utilisé pour effectuer des analyses de texte et de chaines
+# de caracteres, notamment dans le traitement automatique du langage naturel (NLP) et la 
+# recherche d'informations. 
+
+### 20. Calcul de la moyenne d'un tableau de nombres :
