@@ -626,3 +626,22 @@ print(f"La chaine '{chaine}' contient {resultat} voyelles.")
 # recherche d'informations. 
 
 ### 20. Calcul de la moyenne d'un tableau de nombres :
+
+# Detail: ecrire une fonction qui calcule la moyenne des nombres d'un tableau donné.
+# La moyenne est calculée en ajoutant tous les nombres du tableau et en divisant le 
+# total par le nombre de nombres dans le tableau
+
+def calculer_moyenne(tableau):
+    if not tableau:
+        return 0.0 # Si le tableau est vide, la moyenne est 0.0
+    
+    somme = sum(tableau)
+    nombre_d_elements = len(tableau)
+    moyenne = somme / nombre_d_elements
+    return moyenne
+
+    
+# Exemple:
+tableau = [10, 20, 30, 40, 50]
+moyenne = calculer_moyenne(tableau)
+print(f"(La moyenne des nombres dans le tableau est {moyenne}.)")
