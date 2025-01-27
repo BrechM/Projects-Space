@@ -468,3 +468,29 @@ resultat = somme_chiffres(nbr)
 print(f"La somme des chiffres de {nbr} est de {resultat}")
 
 ## 15. Calcul du nombre de chiffres dans un nombre entier
+
+# Probleme : calcul du nombre de chiffres dans un nombre entier
+# Detail: ecrire une fonction qui calcule le nombre de chiffres dans 
+# un nombre donné. 
+
+def nombre_d_chiffres(n):
+    if n == 0: # # Si n vaut 0, il a un seul chiffre
+        return 1
+    count = 0
+    while n != 0: # # Tant que n n'est pas égal à 0
+        count += 1
+        n = n // 10  # Divise n par 10 pour supprimer le dernier chiffre
+        # Etape de la boucle
+        # n = 123, count = 1.
+        # n = 12, count = 2.
+        # n = 1, count = 3.
+        # n = 0, la boucle s'arrête.
+    return count
+    
+    # Exemple:
+    nbr = 12345
+    resultat = nombre_d_chiffres(nbr)
+    print(f"{nbr} a {resultat} chiffres.")
+# ou
+print(nombre_d_chiffres(12345))  # Output: 5
+print(nombre_d_chiffres(0))      # Output: 1
