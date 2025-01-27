@@ -135,7 +135,10 @@ def tri_rapide(X):
 
     "On crée des listes contenant tous les éléments de X qui sont strictement"
     "inférieurs, eagux et superieur au pivot."
-    elements_inf = [x for x in X if x < pivot]
+    # [expression for variable in iterable if condition]
+    # expression : Ce que vous voulez ajouter à la nouvelle liste (ici, x).
+    # for variable in iterable : Parcourt chaque élément de l'itérable (ici, x dans X).
+    elements_inf = [x for x in X if x < pivot] 
     elements_eq = [x for x in X if x==pivot]
     elements_sup = [x for x in X if x > pivot]
     # concaténation des 3 parties
@@ -540,6 +543,41 @@ print(f"Le maximu das le tableau est de {maxi}")
 
 ### 17. Inversion d'une chaine de caracteres
 
-# Detail: ecrire une fonction qui ren une chaine  de caractere en entrée
+# Detail: ecrire une fonction qui rend une chaine  de caractere en entrée
 # et renvoie une nouvelle chaine de caractere de caracteres qui est l'inversion
 # de la chaine d'origine
+
+def inverser_chaine(chaine):
+    return chaine[::-1]
+
+# Exemple:
+chaine = "Brech"
+chaine_inverse = inverser_chaine(chaine)
+print(f"Chaine d'origine: {chaine}")
+print(f"Chaine inversée:{chaine_inverse}")
+
+# Souvent utiliser dans les applications de manipulation de chaine de caractere
+
+### 18. Verification de palindromes
+
+# detail: ecrire une fonction qui verifie si une chaine de caractere donnée est un palindrome
+# palindrome est une sequence qui se lit de la meme maniere de gauche à droite, en ignorant les 
+# espaces, la casse (majuscules ou minuscules) et la ponctuation
+
+def  est_palindrome(chaine):
+    # Nettoyer la chaine (ignorer espaces, casses et ponctuation) 
+    # e.lower() : Convertit chaque caractère e de la chaîne en minuscule avec .lower().
+    # Ne conserver que les caractères alphanumériques (lettres et chiffres) grâce à e.isalnum().
+    # Ignorer les espaces, la ponctuation et autres caractères spéciaux.
+    # Les caractères filtrés sont ensuite assemblés dans une nouvelle chaîne grâce à "".join().
+    chaine = "".join(e.lower() for e in chaine if e.isalnum())
+    # Sortie après nettoyage : "eluparcettecrapule"
+    return chaine == chaine[::-1]
+
+print(est_palindrome("Elu par cette crapule"))  # True
+
+# Nettoyage : "Élu par cette crapule" devient "eluparcettecrapule".
+# Inverse : "eluparcettecrapule".
+# Résultat : True.
+
+print(est_palindrome("bonjour"))  # False
