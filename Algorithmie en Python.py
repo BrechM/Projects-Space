@@ -596,7 +596,11 @@ def nbre_d_voyelles(chaine):
     voyelles = "AEIOUaeiou"
     compteur = 0
     for caractere in chaine: # caractere = chaque lettre
+        # Une boucle for est utilisée pour parcourir chaque caractère de la chaîne chaine.
+        # À chaque itération, la variable caractere prend la valeur du caractère courant dans la chaîne.
         if caractere in voyelles:
+            # Pour chaque caractère, on vérifie s'il est présent dans la chaîne voyelles.
+            # L'expression caractere in voyelles renvoie True si le caractère est une voyelle, sinon False.
             compteur+=1
     return compteur 
 
@@ -645,3 +649,50 @@ def calculer_moyenne(tableau):
 tableau = [10, 20, 30, 40, 50]
 moyenne = calculer_moyenne(tableau)
 print(f"(La moyenne des nombres dans le tableau est {moyenne}.)")
+
+
+### 21. Recherche de la médiane dans un tableau tableau non trié:
+
+# Probleme: recherche de la mediane dans un tableau non trié peut etre un peu plus complexe
+# que dans un tableau trié. Trié le tableau ou utiliser une approche de selection pour trouver
+# l'element median
+
+def mediane(tableau):
+    n = len(tableau)
+
+    if n%2==0:
+        indice1=n//2
+        indice2= indice1-1
+        mediane = (tableau[indice1] + tableau[indice2])/2
+    else:
+        indice = n//2
+        mediane = tableau[indice]
+    return mediane
+
+# Exemple:
+tableau=[12, 4, 7, 9, 2, 23, 16]
+mediane = mediane(tableau)
+print(f"La mediane du tableau est {mediane}")
+
+### 22. Verification de l'unicité des elements dans un tableau
+
+# Description: ecrire une fonction qui verifie si tous les elements d'un tableau
+# donné sont uniques. c-a-d qu'aucun element n'apparait plus d'une fois dans le tableau
+
+def sont_uniques(tableau):
+    ensemble = set() # set() : Un ensemble est une collection non ordonnée d'éléments uniques. Il est utilisé ici pour garder une trace des éléments déjà rencontrés dans le tableau.
+    for element in tableau:
+        if element in ensemble:
+            return False
+        ensemble.add(element) # Si l'élément n'est pas déjà dans l'ensemble, il est ajouté à l'ensemble pour garder une trace des éléments déjà rencontrés.
+    return True
+
+# Exemple:
+tableau1 = [1, 2, 3, 4, 5]
+tableau2 = [1, 2, 3, 3, 4, 5]
+
+resulat1 = sont_uniques(tableau1)
+resulat2 = sont_uniques(tableau2)
+
+print(f"Les elements du tableau 1 sont uniques : {resulat1}")
+print(f"Les elements du tableau 2 sont uniques : {resulat2}")
