@@ -696,3 +696,89 @@ resulat2 = sont_uniques(tableau2)
 
 print(f"Les elements du tableau 1 sont uniques : {resulat1}")
 print(f"Les elements du tableau 2 sont uniques : {resulat2}")
+
+### 23. Rotation d'une chaine de caracteres
+
+# Descrip: ecrire une fonction qui effectue une rotation d'une chaine de caractere donnée.
+# La rotation coniste à deplacer un certain nombre de caracteres d'une extremité de la chaine vers l'autre
+
+def rotation_chaine(chaines, rotation):
+    n = len(chaines)
+    rotation = rotation % n # on utilise ceci pour eviter une rotation supérieure à la longueur de la chaîne
+    # S'assurer que la rotation est dans la plage
+    chaine_rot = chaine[-rotation:]+ chaine[:-rotation]
+    # chaine[-rotation:] : Extrait la sous-chaîne composée des (rotation) derniers caractères de chaine
+    # chaine[:-rotation] : Extrait la sous-chaîne composée de tous les caractères sauf les rotation derniers.
+    # - pour signifier la queue de la chaine de caractere
+    return chaine_rot
+
+# Exemple 
+chaine = "abcdef"
+rotation = 3
+# Puisque 3 est plus petit que 6, il ne peut pas être divisé par 6, donc le reste est 3.
+chaine_rot = rotation_chaine(chaine, rotation)
+print(f"Chaine d'origine :{chaine}")
+print(f"Chaine apres rotation de {rotation} caracteres: {chaine_rot}")
+
+### 24. Fusion de deux tableaux triés:
+
+## Desc: ecrire une fonction qui fusionne deux tableaux triés en un seul tableau trié.
+
+def fusionner_tableaux(tableau1, tableau2):
+    resultat = []
+    i,j = 0, 0
+    while i < len(tableau1) and j < len(tableau2):
+        if tableau1[i] < tableau2[j]:
+            resultat.append(tableau1[i])
+            i+=1 # On passe à la valeur suivante
+        else:
+            resultat.append(tableau2[j])
+            j+=1 # On passe à la valeur suivante
+
+    # Ajout des éléments restants de tableau1
+    # tableau1[i:] : Extrait tous les éléments restants de tableau1 à partir de l'indice i.
+    # resultat.extend(tableau1[i:]) : Ajoute ces éléments à la fin de resultat.
+    resultat.extend(tableau1[i:])
+    resultat.extend(tableau2[j:])
+
+    return resultat 
+
+# Exemple:
+tableau1 = [1, 3, 5]
+tableau2 = [2, 4, 6]
+resultat_fusion = fusionner_tableaux(tableau1, tableau2)
+print(f"Tableau fusionné : {resultat_fusion}")
+
+## Cette algorithme permet de combiner efficacement deux ensembles de données triées
+# tout en preservant l'ordre.
+
+### 25. Calcul de la somme cumulée d'un tableau 
+
+## Descrip : ecrire une fonction qui prend un tableau d'entiers en entrée et renvoie
+# un nouveau tableau ou chaque element est la somme cumulée des elements correspondants
+# du tableau d'entrée.
+
+def somme_cumulée(tableau):
+    somme = 0
+    somme_cumulee = []
+
+    for element in tableau:
+        somme+=element
+        somme_cumulee.append(somme)
+    return somme_cumulee
+
+# Exemple:
+tableau = [1, 2, 3, 4]
+resultat_somme_cumulee= somme_cumulée(tableau)
+print(f"Tableau d'origine : {tableau}")
+print(f"Tableu de somme cumulée : {resultat_somme_cumulee}")
+
+# Le tableau de somme cumulée est souvent utilisé pour analyser
+# des données ou suivre l'evolution cumulatative de valeurs au fil
+# du temps.
+
+### 26. Conversion d'un nombre décimal en binaire
+
+## Descr: Ecrire une fonction qui prend un nombre décimal en entrée
+# et renvoie sa representation en binaire sous forme de chaine de 
+# caracteres. 
