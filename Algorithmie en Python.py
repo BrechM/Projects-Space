@@ -781,4 +781,32 @@ print(f"Tableu de somme cumulée : {resultat_somme_cumulee}")
 
 ## Descr: Ecrire une fonction qui prend un nombre décimal en entrée
 # et renvoie sa representation en binaire sous forme de chaine de 
-# caracteres. 
+# caractères.
+
+def decimal_en_binaire(decimal):
+    if decimal==0:
+        return "0"
+
+    binaire = ""
+    while decimal > 0: # La boucle while continue tant que le nombre décimal est supérieur à 0.
+        reste = decimal % 2
+        binaire = str(reste) + binaire # str(reste) : Convertit le reste en chaîne de caractères.
+        decimal = decimal // 2
+    return binaire  
+
+# Fonctionnement de l'algorithme
+
+# Itération 1 :
+
+# decimal = 10
+# reste = 10 % 2 = 0
+# binaire = "0" + "" = "0"
+# decimal = 10 // 2 = 5
+
+# Itération 2 :
+# decimal = 5
+# reste = 5 % 2 = 1
+# binaire = "1" + "0" = "10"
+# decimal = 5 // 2 = 2
+
+# NB: lorsqu'on a une boucle while, definir dans un premier la condition qui arrete la boucle.
