@@ -810,3 +810,5 @@ def decimal_en_binaire(decimal):
 # decimal = 5 // 2 = 2
 
 # NB: lorsqu'on a une boucle while, definir dans un premier la condition qui arrete la boucle.
+
+
