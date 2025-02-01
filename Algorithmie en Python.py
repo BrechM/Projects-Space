@@ -841,3 +841,62 @@ print(f"La sous_chaine '{sous_chaine}' apparait aux indices:{resultat_occurence}
 # Cette technique est couramment utilisé pour rechercher des mots, des phrases ou des motifs spécifiques
 # dans les chaines de caracteres, ce qui est essentiel dans de nombreuses applications de traitement de
 # texte et de manipulation de données.
+
+### 28. Calcul de l'intersection de deux ensembles
+
+# Descrip : Ecrire une fonction qui prend deux ensembles en entrée et renvoie un nouvel ensemble
+#  contenant les éléments qui sont presents dans les deux ensembles d'origine.
+
+def intersection_ensemble (ensemble1, ensemble2):
+    intersection = ensemble1.intersection(ensemble2)
+    return intersection
+
+# Exemple 
+ensemble1 = {1, 2, 3, 4}
+ensemble2 = {3, 4, 5, 6}
+resultat_intersection = intersection_ensemble(ensemble1, ensemble2)
+
+
+# Cette approche est efficace pour trouver les elements communs à deux ensembles
+# et est courament utilisée dans des opérations de comparaison et de filtrage de données
+
+### 29. Calcul de l'union de deux ensembles:
+
+def union_ensemble(ensemble1, ensemble2):
+    union = ensemble1.union(ensemble2)
+    return union
+
+# EXEMPLE:
+ensemble1 = {1, 2, 3, 4}
+ensemble2 = {3, 4, 5, 6}
+resultat = union_ensemble(ensemble1, ensemble2)
+
+print(f"L'union de {ensemble1} et {ensemble2} est {resultat}")
+
+### 30. Difference de duex ensembles :
+
+# Desc : Ecrire une fonction qui prend deux ensembles en entrée et renvoie un nouvel ensemble contenant les elements
+# présents dans le premier ensemble, mais pas dans le deuxieme
+# ensemble. 
+
+def difference_ensemble(ensemble1, ensemble2):
+    diff = ensemble1.difference(ensemble2)
+    return diff
+
+# EXEMPLE:
+ensemble1 = {1, 2, 3, 4}
+ensemble2 = {3, 4, 5, 6}
+resultat = difference_ensemble(ensemble1, ensemble2)
+
+print(f"La difference de {ensemble1} et {ensemble2} est {resultat}")
+
+# Approche efficace pour trouver les élements qui sont presents dans un ensemble
+# mais absents das un autre,ce qui ets courament utilisé dans des des operations
+# de filtrage ou de suppression de données.
+
+# Cet algorithme s'utilise aussi pour trouver le complément de l'ensemble
+# Cette approche est utile pour trouver les elements qui sont inclus dans un
+# ensemble mais non inclus dans un autre, ce qui peut etre necessaire dans 
+# diverses opérations de filtrage ou de comparaison de donnée
+
+### 32. Tri topologique d'un graphe dirigé :
