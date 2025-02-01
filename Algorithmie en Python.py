@@ -811,4 +811,33 @@ def decimal_en_binaire(decimal):
 
 # NB: lorsqu'on a une boucle while, definir dans un premier la condition qui arrete la boucle.
 
+# Exemple :
+nombre_decimal = 12
+nombre_binaire = decimal_en_binaire(nombre_decimal)
+print(f"Le nombre décimal {nombre_decimal} en binaire est {nombre_binaire}")
 
+### 27. Recherche de sous-chaines dans une chaine de caracteres
+
+# Ecrire une fonction qui recherche toutes les occurences d'une sous-chaine donnée
+# dans une chaine de caracteres donnée et renvoie les indices de début de chaque
+# occurence. 
+
+def trouver_occurence(chaine, sous_chaine):
+    occurence = []
+    longueur_chaine = len(chaine)
+    longueur_sous_chaine = len(sous_chaine)
+    
+    for i in range(longueur_chaine - longueur_sous_chaine+1):
+        if chaine[i:i + longueur_sous_chaine]== sous_chaine: # chaine[0:4] extrait les caractères de l'indice 0 à l'indice 3
+            occurence.append(i) 
+    return occurence
+
+# Exemple:
+chaine = "abracadabra"
+sous_chaine = "abra"
+resultat_occurence = trouver_occurence(chaine, sous_chaine)
+print(f"La sous_chaine '{sous_chaine}' apparait aux indices:{resultat_occurence}")
+
+# Cette technique est couramment utilisé pour rechercher des mots, des phrases ou des motifs spécifiques
+# dans les chaines de caracteres, ce qui est essentiel dans de nombreuses applications de traitement de
+# texte et de manipulation de données.
