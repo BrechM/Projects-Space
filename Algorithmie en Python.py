@@ -900,3 +900,7 @@ print(f"La difference de {ensemble1} et {ensemble2} est {resultat}")
 # diverses opérations de filtrage ou de comparaison de donnée
 
 ### 32. Tri topologique d'un graphe dirigé :
+
+# Detail : le tri topologique est un algorithme utilisé pour ordonner les noeuds
+# d'un graphe dirigé acyclique (DAG) de telle maniere que si un noeud A est relié 
+# à un noeud B par une arete, alors A apparait avant B dans l'ordre.
