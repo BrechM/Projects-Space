@@ -61,7 +61,7 @@ import math
 # In[53]:
 
 
-# Creation d'un classe en Python
+# Creation d'une classe en Python
 class Point:
     def __init__(self, abscisse, ordonne) :
         self.x = abscisse
@@ -231,6 +231,119 @@ print(C)
 ## Heritage : c'est la possibilité de créer une classe en se basant sur une autre. La nouvelle classe hérite des attributs et fonctions de la précedente 
 # mais aussi avoir ses propres fonctionnalités et attributs. Un exemple réel serait une classe d'Adulte qui hérite de la classe humain mais qui a ses
 # propres attributs comme statut_matrimonial et des fonctions comme acheter_une_maison
+
+
+# ### Debut livre sur la prog orientée objet
+
+# In[28]:
+
+
+# Exercice 1:
+
+class Biscuit:
+    ## Constructeur
+    def __init__(self, nom,forme):
+        ##  Initialisation des attributs à l'aide des parametres
+        ## passés du construceur
+        self.nom = nom
+        self.forme = forme
+
+    def cuir(self):
+        """
+        Cette methode sert simplement d'affichage
+        sur la console afin de donner plus d'informations
+        sur le biscuit
+        """
+        print("Ce", self.nom, "a été cuit sous forme d'une", self.forme)
+        print("Bonne degustation")
+
+# Exemples de tests / Cas d'usages
+
+## Instanciation de l'objet "Biscuit_1" de la classe biscuit
+biscuit_1 = Biscuit("Cookie pepite de chocolat", "etoile")
+
+# Appel de la methode "cuir()" en utilisant l'instance créée
+
+biscuit_1.cuir()
+
+
+
+
+
+# In[38]:
+
+
+# Exercice 2:
+
+class Livre:
+    def __init__(self,titre,auteur, prix):
+        self.titre = titre
+        self.auteur = auteur
+        self.prix = prix
+
+    def afficher_information(self):
+        """
+        Cette methode permet d'afficher les informations liées au livre.
+        """
+        print(f"Le livre intitulé '{self.titre}', écrit par l'auteur '{self.auteur}' se vend à {self.prix} euros.")
+
+### Exemples de tests / Cas d'usage
+
+## Instanciation de l'objet "livre_1" à partir de classe livre
+livre_1 = Livre("100 exercices python pour s'entrainer", "Laurentine K.Masson", 10.99)
+
+## Appel de methode pour  afficher les informations du livre
+livre_1.afficher_information()
+
+
+# In[42]:
+
+
+# Exercice 3: 
+
+class Note:
+    def __init__(self,note,nomEtudiant):
+        ## Initialisation des attributs de classe Note
+        self.note = note
+        self.nomEtudiant = nomEtudiant
+
+    def a_reussi(self):
+        """
+        Cette methode permet de verifier si un etudiant a reussi ou echouer.
+        La note seuil pour reussir est de 75
+        Si la note de l'eleve dépasse 75, alors l"eleve a reussi
+        Sinon il a échoué
+        """
+        if self.note > 75:
+            print(f"L'etudiant(e) {self.nomEtudiant} a réussi(e)")
+        else:
+            print(f"L'etudiant(e) {self.nomEtudiant} a échoué(e)")
+
+## Exemples de tests / Cas d'usages
+## Creation d'une instance
+note_1 = Note(80, "Julien")
+## Appel de méthodes
+note_1.a_reussi()
+        
+
+
+# In[44]:
+
+
+# Autre exemple:
+note_2 = Note(35,"Amelie")
+
+## Pour acceder à l'attribut d'une instance, il suffit d'ecrire nominstance.nomAttribut
+print(f"La note obtenue par {note_2.nomEtudiant} lors de la premiere correction est : {note_2.note}")
+
+
+# In[48]:
+
+
+## Modification de l'attribut "note" de l'instance note_2
+note_2.note = 70
+print(f"Apres une deuxieme correction, la note d'{note_2.nomEtudiant} est égal à {note_2.note}")
+note_2.a_reussi()
 
 
 # In[ ]:
