@@ -904,3 +904,82 @@ print(f"La difference de {ensemble1} et {ensemble2} est {resultat}")
 # Detail : le tri topologique est un algorithme utilisé pour ordonner les noeuds
 # d'un graphe dirigé acyclique (DAG) de telle maniere que si un noeud A est relié 
 # à un noeud B par une arete, alors A apparait avant B dans l'ordre.
+
+# Probleme : Ecrire une fonction qui prend en entrée un graphe dirigé acyclique
+# (représenté sous forme d'un dictionnaire ou chaque noeud est associé à une liste
+# de ses noeuds adjacents) et renvoie un ordre topologique valide des noeuds
+
+from collections import defaultdict, deque
+
+def tri_topologique(graphe):
+    indegree = defaultdict(int) ## Dictionnaire stockant le nombre d'arêtes entrantes de chaque nœud. 
+    ## defaultdict(int) :C'est un dictionnaire qui retourne 0 par défaut si une clé n'existe pas.
+    ## 'A': ['C'],
+    ## 'B': ['C', 'D'],
+    ## 'C': ['E'] ====> indegree[C] = 2 par exemple
+    ordre_topologique = []
+
+    ## Calculer le degré  d'entrée de chaque noeud
+    for noeud, voisins in graphe.items(): 
+        ## items():  récupére à la fois les clés et les valeurs sous forme de paires (clé, valeur).
+        ## On parcourt chaque nœud et ses voisins dans le graphe.
+        ## noeud correspond à une clé du dictionnaire, donc un sommet du graphe.
+        ## voisins correspond à la valeur associée à cette clé, c'est-à-dire la liste des nœuds 
+        ## vers lesquels noeud a une arête.
+        for voisin in voisins:
+            indegree[voisin]+=1
+
+    ## Initialiser la file des noeuds sans prédécesseurs
+    file_sans_predecesseur = deque([noeud for noeud in graphe if
+                                    indegree[noeud]==0]) # permet de créer une liste contenant tous 
+    ## les nœuds du graphe dont le degré d'entrée est égal à 0.
+    
+    ## Parcourir le graphe
+    while file_sans_predecesseur:
+        noeud = file_sans_predecesseur.popleft() ## On enlève (popleft()) un nœud de la file.
+        ordre_topologique.append(noeud) ## On l'ajoute à l'ordre topologique.
+
+    ## Reduire le degré d'entrée de ses voisins
+    for voisin in graphe[noeud]:
+        indegree[voisin]-= 1
+        if indegree[voisin]==0:
+            file_sans_predecesseur.append(voisin)
+    
+    return ordre_topologique
+
+## Exemple:
+graphe = {'A':['B','C'], 'B':['D','E'], 'C':['E'], 'D':[], 'E':[]} # Un dictionnaire où chaque clé est 
+## un nœud et chaque valeur est une liste de voisins (les nœuds connectés à lui).
+## les clés sont les nœuds et les valeurs sont les listes des nœuds voisins.
+
+resultat_tri_topologique = tri_topologique(graphe)
+print(f"Ordre topologique : {resultat_tri_topologique}")
+
+## seul 'A' a un degré d'entrée de 0, donc l'output sera : Ordre topologique : ['A']
+
+## 33. Parcours en profondeur (DFS) d'un graphe
+
+# Detail : Le parcours en profondeur (Depth-First Search, DFS) est un algorithme utilisé pour explorer 
+# ou parcourir un graphe, en commencant par un noeud de depart, en explorant autant que possible le 
+# long d'une branche avant de revenir en arriere.
+
+## Description : Ecrire une fonction qui realise un parcours en profondeur d'un graphe dirigé ou non
+## dirigé et renvoie l'ordre dans lequel les noeuds ont été visités.
+
+from collections import defaultdict
+
+class Graph:
+    def __init__(self):
+        self.graph = defaultdict(list) ## Exemple: Output: {'A': ['B', 'C']}
+
+    def ajouter_arete(self, u, v):
+        self.graph[u].append(v) ## ajoute v à la liste des voisins de u.
+
+    def dfs_recursif(self, noeud, visite):
+        visite.append(noeud)
+
+        for voisin in self.graph[noeud]:
+            if voisin not in visite:
+                self.dfs_recursif(noeud_depart, visite)
+    
+        return visite
