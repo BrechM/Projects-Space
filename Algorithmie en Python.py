@@ -38,13 +38,12 @@ print(arr)
 def tri_par_selection(X):
     n =len(X)
     for i in range(n):
-        # recherche de l'indice du minimum dans la portion non triée du tableau
         min_index = i 
-        for j in range(i+1,n):
-            if arr[j]< arr[min_index]:
+        for j in range(i+1,n): # recherche de l'indice du minimum dans la portion non triée du tableau
+            if X[j]< X[min_index]:
                 min_index = j
                 # (alors) Echanger l'element minimum avec l'element en cours de tri
-                arr[i], arr[min_index] = arr[min_index], arr[i]
+                X[i], X[min_index] = X[min_index], X[i]
 
 # Exemple: 
 arr =[ 64, 25, 12, 22, 11]
