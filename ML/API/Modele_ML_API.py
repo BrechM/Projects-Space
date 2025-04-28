@@ -70,7 +70,7 @@ def obtenir_parametres():
     coeffs = modele_sklearn.coef_.tolist()
     coeffs.insert(0, modele_sklearn.intercept_)
 
-    r2 = modele_sm.rsquared  # Correction de la faute de frappe
+    r2 = modele_sm.rsquared  
     p_valeurs = modele_sm.pvalues.tolist()
     significativite = ["Significatif" if p < 0.05 else "Non significatif" for p in modele_sm.pvalues]
 
