@@ -1,12 +1,13 @@
-# La modularisation du code va consister à ecrire des fonctions pythons qui vont permettre de 
+# La modularisation du code va consister à ecrire des fonctions pythons qui vont permettre de
 # generer le process de A à Z
 
-# La modularisation fait ce qui a été fait sur le Notebook mais de facon automatique
+# La modularisation fait ce qui a été fait sur le Notebook mais de facon
+# automatique
 
 """
 This is the churn_libary.py python file that used to find customers who are likely to churn
 The execution of this file will produce artefacts in images and models folders.
-Date: April 02, 2023
+Date: April
 """
 import os
 import logging
@@ -18,19 +19,20 @@ from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.metrics import RocCurveDisplay, classification_report
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import FunctionTransformer, StandardScaler, OneHotEncoder
-from sklearn.pipeline import Pipeline 
+from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
-import joblib  
+import joblib
 
 # Pour la journalisation
 logging.basicConfig(
-    filename='C:/Users/brech/Desktop/dossier de taff/ML/Projet 1/logs/churn_library.log',
-    level= logging.INFO,
+    filename='C:/Users/brech/Desktop/dossier de taff/ML/Projet1/logs/churn_library.log',
+    level=logging.INFO,
     filemode='w',
-    format='%(names)s - %(levelname)s - %(message)s')
+    format='%(name)s - %(levelname)s - %(message)s')
 
 # Importation des données
+
 
 def import_data(path):
     """
@@ -45,9 +47,10 @@ def import_data(path):
     df.drop('customerID', axis=1, inplace=True)
     df['Churn'] = df['Churn'].apply(lambda val: 0 if val == "No" else 1)
 
-    return df 
+    return df
 
 # Split des données
+
 
 def data_spliting(df):
     """
@@ -57,7 +60,7 @@ def data_spliting(df):
             train: training dataframe
             validate: validation dataframe
             test: test dataframe
-    """ 
+    """
     train, test = train_test_split(
         df, test_size=0.3, random_state=123, stratify=df['Churn']
     )
@@ -66,18 +69,25 @@ def data_spliting(df):
     )
 
     # Enregistrement des differents ensembles de données
-    train.to_csv('C:/Users/brech/Desktop/dossier de taff/ML/Projet 1/data/train.csv', index=False)
-    validate.to_csv('C:/Users/brech/Desktop/dossier de taff/ML/Projet 1/data/validation.csv', index=False)
-    test.to_csv('C:/Users/brech/Desktop/dossier de taff/ML/Projet 1/data/test.csv', index=False)
+    train.to_csv(
+        'C:/Users/brech/Desktop/dossier de taff/ML/Projet1/data/train.csv',
+        index=False)
+    validate.to_csv(
+        'C:/Users/brech/Desktop/dossier de taff/ML/Projet1/data/validation.csv',
+        index=False)
+    test.to_csv(
+        'C:/Users/brech/Desktop/dossier de taff/ML/Projet1/data/test.csv',
+        index=False)
 
     X_train, X_val = train.drop(
         'Churn', axis=1), validate.drop(
         'Churn', axis=1)
     y_train, y_val = train['Churn'], validate['Churn']
 
-    return train, X_train, y_train, X_val, y_val 
+    return train, X_train, y_train, X_val, y_val
 
 # Exploration visuelle des données
+
 
 def perform_eda(df):
     """
@@ -109,10 +119,14 @@ def perform_eda(df):
                 df[column_name].hist()
             else:
                 sns.countplot(data=df, x=column_name)
-        plt.savefig("C:/Users/brech/Desktop/dossier de taff/ML/Projet 1/images/eda/" + column_name + ".jpg")
+        plt.savefig(
+            "C:/Users/brech/Desktop/dossier de taff/ML/Projet1/images/eda/" +
+            column_name +
+            ".jpg")
         plt.close()
 
 # Fonction rapport de classification
+
 
 def classification_report_image(y_train,
                                 y_train_preds,
@@ -133,7 +147,7 @@ def classification_report_image(y_train,
         "Logistic Regression train results": classification_report(
             y_train,
             y_train_preds),
-            # classification_report est une fonction sklearn.metrics
+        # classification_report est une fonction sklearn.metrics
         "Logistic Regression validation results": classification_report(
             y_val,
             y_val_preds)}
@@ -145,27 +159,31 @@ def classification_report_image(y_train,
                 'fontsize': 10}, fontproperties='monospace')
         plt.axis('off')
         plt.title(title, fontweight='bold')
-        plt.savefig("C:/Users/brech/Desktop/dossier de taff/ML/Projet 1/images/results/" + title + ".jpg")
+        plt.savefig(
+            "C:/Users/brech/Desktop/dossier de taff/ML/Projet1/images/results/" +
+            title +
+            ".jpg")
         plt.close()
 
 # Fonction pour régler le probleme de la colonne 'TotalCharges'
+
 
 def convert_totalcharges(X):
     # X : dataframe
     Z = X.copy()
     Z['TotalCharges'] = pd.to_numeric(Z['TotalCharges'], errors='coerce')
-    return Z.values # .values me retourne un tableau numpy
+    return Z  # On peut mettre Z.values qui retourne un tableau numpy
 
 
 def build_pipeline():
     numeric_features = [
-        'SeniorCitizen', 
-        'tenure', 
-        'MonthlyCharges', 
+        'SeniorCitizen',
+        'tenure',
+        'MonthlyCharges',
         'TotalCharges'
     ]
 
-    categorical_fetures = [
+    categorical_features = [
         'gender',
         'Partner',
         'Dependents',
@@ -197,7 +215,7 @@ def build_pipeline():
              OneHotEncoder(
                  sparse_output=False,
                  handle_unknown='ignore'))])
-    
+
     # Combinaison des deux précedents pipelines en un seul
     preprocessor = ColumnTransformer(
         transformers=[
@@ -206,20 +224,22 @@ def build_pipeline():
              numeric_features),
             ('categorical',
              categorical_transformer,
-             categorical_fetures)])
-    
+             categorical_features)])
+
     # Pipeline de modélisation
     pipeline_model = Pipeline(
         steps=[('preprocessor', preprocessor),
-               ('logreg', LogisticRegression(solver='newton-cg', # On recupere nos reglages d'hyperparametre
+               ('logreg', LogisticRegression(solver='newton-cg',  # On recupere nos reglages d'hyperparametre
                                              random_state=123,
                                              max_iter=2000,
                                              C=5.0,
-                                             penalty='12'))]
+                                             penalty='l2'))]
     )
     return pipeline_model
 
 # Creation d'une fonction train_models
+
+
 def train_models(X_train, X_val, y_train, y_val):
     """
     train, store model results: images + scores, and store models
@@ -241,7 +261,8 @@ def train_models(X_train, X_val, y_train, y_val):
 
     # ROC curves image
     lrc_plot = RocCurveDisplay.from_estimator(model, X_val, y_val)
-    plt.savefig("C:/Users/brech/Desktop/dossier de taff/ML/Projet 1/images/results/roc_curve.jpg")
+    plt.savefig(
+        "C:/Users/brech/Desktop/dossier de taff/ML/Projet1/images/results/roc_curve.jpg")
     plt.close()
 
     # Classification reports images
@@ -250,30 +271,35 @@ def train_models(X_train, X_val, y_train, y_val):
         y_train_preds_lr,
         y_val,
         y_val_preds_lr)
-    
+
     # Sauvegarde du modele
-    joblib.dump(model, 'C:/Users/brech/Desktop/dossier de taff/ML/Projet 1/models/logreg_model.pkl')
+    joblib.dump(
+        model,
+        'C:/Users/brech/Desktop/dossier de taff/ML/Projet1/models/logreg_model.pkl')
 
-    # Fonction qui va executer toutes les etapes 
 
-    def main():
-        logging.info("Importation des données...")
-        raw_data = import_data("C:/Users/brech/Desktop/dossier de taff/ML/Projet 1/data/WA_Fn-UseC_-Telco-Customer-Churn.csv")
-        logging.info("Importation des données : SUCCES")
+# Fonction qui va executer toutes les etapes
 
-        logging.info("Division des données...")
-        train_data, Xtrain, ytrain, Xval, yval = data_spliting(raw_data)
-        logging.info("Division des données : SUCCES")
+def main():
+    logging.info("Importation des données...")
+    raw_data = import_data(
+        "C:/Users/brech/Desktop/dossier de taff/ML/Projet1/data/WA_Fn-UseC_-Telco-Customer-Churn.csv")
+    logging.info("Importation des données : SUCCES")
 
-        logging.info("Analyse exploratoire des données...")
-        perform_eda(train_data)
-        logging.info("Analyse exploratoire des données : SUCCES")
+    logging.info("Division des données...")
+    train_data, Xtrain, ytrain, Xval, yval = data_spliting(raw_data)
+    logging.info("Division des données : SUCCES")
 
-        logging.info("Formation du modele...")
-        train_models(Xtrain, Xval, ytrain, yval)
-        logging.info("Formation du modele : SUCCES")
+    logging.info("Analyse exploratoire des données...")
+    perform_eda(train_data)
+    logging.info("Analyse exploratoire des données : SUCCES")
 
-    if __name__ == "__main__":
-        print("Execution en cours...")
-        main()
-        print("Fin de l'Execution avec succes")
+    logging.info("Formation du modele...")
+    train_models(Xtrain, Xval, ytrain, yval)
+    logging.info("Formation du modele : SUCCES")
+
+
+if __name__ == "__main__":
+    print("Execution en cours...")
+    main()
+    print("Fin de l'Execution avec succes")
