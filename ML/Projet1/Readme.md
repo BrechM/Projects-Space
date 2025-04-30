@@ -1,4 +1,4 @@
-# Predicition du désabonnement des clients d'une entreprise
+# Prediction du désabonnement des clients d'une entreprise
 
 Objectif : construire un modele de Machine Learning capable de predire si un client va se désabonner. Permettra à l'entreprise de déployer des campagnes Marketing vers le clients à haut risque de désabonnement et de de leur proposer des offres pour les garder dans l'entreprise
 
