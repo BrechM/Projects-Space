@@ -1,6 +1,6 @@
-## Construction d'un processus ETL
+## Construire un processus ETL
 
-Etape:
+**Etape:**
 - Ingestion de plusieurs fichiers (csv, json,...)
 - transformation
 - chargement
